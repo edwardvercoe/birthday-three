@@ -1,0 +1,79 @@
+$pink: #ffe2ee;
+$dropshadow: #fcc5dc;
+
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+
+  &.disable-scroll {
+    overflow: hidden !important;
+  }
+}
+
+body {
+  overflow-x: hidden;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: #fff;
+  text-align: center;
+  text-shadow: 3px 3px $dropshadow;
+}
+
+h1 {
+  font-size: 4.375rem;
+  text-shadow: 4px 4px $dropshadow;
+}
+
+h3 {
+  font-size: 5.625rem;
+}
+
+h4 {
+  font-size: 1.75rem;
+}
+
+header {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  width: 100%;
+  min-height: 100vh;
+}
+
+footer {
+  padding-bottom: 40px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .center {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
