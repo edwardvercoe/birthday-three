@@ -8,6 +8,7 @@
 }
 
 $pink: #ffe2ee;
+$yellow: #fceac2;
 $dropshadow: #fcc5dc;
 
 html {
@@ -26,6 +27,9 @@ html {
 body {
   overflow-x: hidden;
   font-family: "CooperBlack", Arial, Helvetica, sans-serif;
+  line-height: 1.2;
+  background-color: $pink;
+  transition: background-color 0.5s ease;
 }
 
 *,
@@ -77,6 +81,15 @@ p {
   text-align: center;
 }
 
+.text-left {
+  text-align: left !important;
+  margin: 0 !important;
+
+  p {
+    text-align: left !important;
+  }
+}
+
 main {
   width: 100%;
   max-width: 1440px;
@@ -108,6 +121,7 @@ section {
 .polaroid {
   min-height: 310px;
   width: 263px;
+  z-index: -1;
 
   figure {
     img {
@@ -146,6 +160,21 @@ section {
     flex-direction: column;
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    z-index: -1;
+  }
+}
+
+.polaroid-collection {
+  display: flex;
+
+  .container {
+    .polaroid {
+      display: inline-block;
+    }
+  }
+
+  * {
+    margin: auto !important;
   }
 }
 

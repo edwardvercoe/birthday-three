@@ -9,7 +9,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { gsap } from "gsap";
 
 // Debug
-const gui = new dat.GUI();
+// const gui = new dat.GUI();
 
 const modelPath = "/models/cupcake.glb";
 
@@ -29,7 +29,7 @@ const pinkColor = new THREE.Color(0xffe2ee);
 
 // Scene
 const scene = new THREE.Scene();
-scene.background = pinkColor;
+scene.background = null;
 scene.fog = new THREE.Fog(pinkColor, 0.0025, 8);
 
 /**
@@ -146,6 +146,7 @@ window.addEventListener("resize", () => {
  */
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
+  alpha: true,
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
