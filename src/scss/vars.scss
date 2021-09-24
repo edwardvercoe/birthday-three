@@ -1,0 +1,18 @@
+@font-face {
+  font-family: "CooperBlack";
+  font-style: normal;
+  font-weight: 400;
+  src: local(""), url("../fonts/CooperBlackStd.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Scribble";
+  font-style: normal;
+  font-weight: 400;
+  src: local(""), url("../fonts/ScribbleILTD-Regular.woff2") format("woff2");
+}
+
+$pink: #ffe2ee;
+$yellow: #fceac2;
+$dropshadow: #fcc5dc;
+$dropshadowYellow: #f8d484;

@@ -56,17 +56,17 @@ module.exports = {
       },
 
       // Images
-      {
-        test: /\.(gif|jpe?g|png|svg|webp)$/,
-        use: {
-          loader: "file-loader",
-          options: {
-            publicPath: "/images",
-            outputPath: "images",
-            name: "[name].[hash:8].[ext]",
-          },
-        },
-      },
+      // {
+      //   test: /\.(gif|jpe?g|png|svg|webp)$/,
+      //   use: {
+      //     loader: "file-loader",
+      //     options: {
+      //       name: "images/[name].[hash:6].[ext]",
+      //       publicPath: "../",
+      //       // name: "[name].[hash:8].[ext]",
+      //     },
+      //   },
+      // },
 
       // Fonts
       {

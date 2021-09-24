@@ -1,15 +1,6 @@
+@import "vars";
 @import "reset";
-
-@font-face {
-  font-family: "CooperBlack";
-  font-style: normal;
-  font-weight: 400;
-  src: local(""), url("../fonts/CooperBlackStd.woff2") format("woff2");
-}
-
-$pink: #ffe2ee;
-$yellow: #fceac2;
-$dropshadow: #fcc5dc;
+@import "swiper";
 
 html {
   -webkit-box-sizing: border-box;
@@ -48,6 +39,28 @@ body {
   z-index: -3; /* testing */
 }
 
+.color-yellow {
+  &.active {
+    p,
+    h2,
+    h3,
+    h4,
+    h5 {
+      text-shadow: 3px 3px $dropshadowYellow;
+    }
+  }
+}
+
+.col-two {
+  display: flex;
+  padding: 100px 0;
+
+  > div {
+    flex: 1 0 50%;
+    padding: 0 30px;
+  }
+}
+
 h1,
 h2,
 h3,
@@ -75,7 +88,7 @@ h4 {
 }
 
 p {
-  font-size: 1.875rem;
+  font-size: 1.625rem;
   text-shadow: 3px 3px $dropshadow;
   color: #fff;
   text-align: center;
@@ -109,19 +122,26 @@ header {
 section {
   width: 100%;
   min-height: 100vh;
+  // border: 1px dotted red;
+  padding: 150px 0;
 
   .birthday-msg {
     position: relative;
     z-index: 5;
-    max-width: 750px;
+    width: 100%;
     margin: 0 auto;
+    p {
+      max-width: 900px;
+      margin: 0 auto;
+    }
   }
 }
 
 .polaroid {
   min-height: 310px;
   width: 263px;
-  z-index: -1;
+
+  font-family: "Scribble", Arial, Helvetica, sans-serif;
 
   figure {
     img {
@@ -136,12 +156,14 @@ section {
     text-shadow: none;
     color: #0a0a0a;
     padding: 20px 0;
+    text-shadow: none !important;
+    user-select: none;
   }
 
   &.right-tilt {
-    margin-left: auto;
     .polaroid__container {
       transform: rotate(5deg);
+      margin-left: auto;
     }
   }
 
