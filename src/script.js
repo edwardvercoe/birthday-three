@@ -1,6 +1,6 @@
 import "./scss/main.scss";
 import "./three.js";
-import Rellax from "rellax";
+// import Rellax from "rellax";
 import inView from "in-view";
 import Swiper, { Navigation } from "swiper";
 // import Swiper styles

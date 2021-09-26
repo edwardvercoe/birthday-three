@@ -1,6 +1,7 @@
 @import "vars";
 @import "reset";
 @import "swiper";
+@import "breakpoints";
 
 html {
   -webkit-box-sizing: border-box;
@@ -54,10 +55,22 @@ body {
 .col-two {
   display: flex;
   padding: 100px 0;
+  @include media($tablet-bp...) {
+    display: block;
+  }
 
   > div {
     flex: 1 0 50%;
-    padding: 0 30px;
+    // padding: 0 30px;
+    padding-right: 30px;
+    padding-left: 30px;
+
+    @include media($tablet-bp...) {
+      padding: 30px;
+    }
+  }
+  .polaroid__container {
+    margin: 0 auto;
   }
 }
 
@@ -73,18 +86,35 @@ h4 {
 h1 {
   font-size: 4.375rem;
   text-shadow: 4px 4px $dropshadow;
+
+  @include media($tablet-bp...) {
+    font-size: 3rem;
+  }
 }
 
 h2 {
   font-size: 3.125rem;
+
   margin-bottom: 20px;
+
+  @include media($tablet-bp...) {
+    font-size: 2rem;
+  }
 }
 h3 {
   font-size: 5.625rem;
+
+  @include media($tablet-bp...) {
+    font-size: 2rem;
+  }
 }
 
 h4 {
   font-size: 1.75rem;
+
+  @include media($tablet-bp...) {
+    font-size: 1.25rem;
+  }
 }
 
 p {
@@ -92,6 +122,10 @@ p {
   text-shadow: 3px 3px $dropshadow;
   color: #fff;
   text-align: center;
+
+  @include media($tablet-bp...) {
+    font-size: 1rem;
+  }
 }
 
 .text-left {
@@ -125,6 +159,10 @@ section {
   // border: 1px dotted red;
   padding: 150px 0;
 
+  @include media($tablet-bp...) {
+    padding: 100px 0;
+  }
+
   .birthday-msg {
     position: relative;
     z-index: 5;
@@ -140,7 +178,7 @@ section {
 .polaroid {
   min-height: 310px;
   width: 263px;
-
+  position: relative;
   font-family: "Scribble", Arial, Helvetica, sans-serif;
 
   figure {
@@ -162,7 +200,7 @@ section {
 
   &.right-tilt {
     .polaroid__container {
-      transform: rotate(5deg);
+      transform: rotate(8deg);
       margin-left: auto;
     }
   }
@@ -170,7 +208,7 @@ section {
   &.left-tilt {
     margin-right: auto;
     .polaroid__container {
-      transform: rotate(-5deg);
+      transform: rotate(-8deg);
     }
   }
   &__container {
@@ -183,11 +221,17 @@ section {
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
     z-index: -1;
+    position: relative;
   }
 }
 
 .polaroid-collection {
   display: flex;
+  padding: 60px 0;
+
+  @include media($tablet-bp...) {
+    display: block;
+  }
 
   .container {
     .polaroid {
@@ -205,14 +249,34 @@ footer {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  // justify-content: center;
+  // align-items: center;
   .center {
+    padding-top: 40px;
     flex: 1;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  }
+}
+
+.loading-svg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  opacity: 1;
+  z-index: 999;
+  background-color: $pink;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease;
+
+  &.remove {
+    opacity: 0;
+    user-select: none;
   }
 }

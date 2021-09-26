@@ -7,11 +7,16 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 // import vertexShader from "./shaders/vertex.glsl";
 // import fragmentShader from "./shaders/fragment.glsl";
 import { gsap } from "gsap";
+import inView from "in-view";
 
 // Debug
 // const gui = new dat.GUI();
 
-const modelPath = "/models/cupcake.glb";
+const loadDiv = document.querySelector(".loading-svg");
+
+const modelPath = "/models/cupcake2.glb";
+const colorCake = "/models/color-cupcake.glb";
+const champagnePath = "/models/bottle-cork.glb";
 
 /**
  * Sizes
@@ -52,8 +57,76 @@ scene.add(camera);
 const material = new THREE.MeshLambertMaterial({ color: pinkColor });
 
 // Model
+const loadingManager = new THREE.LoadingManager(
+  // loaded
+  () => {
+    loadDiv.classList.add("remove");
 
-const gltfLoader = new GLTFLoader();
+    window.setTimeout(() => {
+      loadDiv.remove();
+    }, 500);
+  },
+  // progress
+  (itemUrl, itemsLoaded, itemsTotal) => {
+    const progressRatio = itemsLoaded / itemsTotal;
+  }
+);
+const gltfLoader = new GLTFLoader(loadingManager);
+
+// color top cake
+
+let topCake;
+
+gltfLoader.load(
+  colorCake,
+  (gltf) => {
+    const model = gltf.scene;
+
+    model.scale.set(5, 5, 5);
+    //position
+    model.position.x = 0;
+    model.position.y = -0.5;
+    model.position.z = 1;
+
+    // model.traverse((o) => {
+    //   if (o.isMesh) o.material = material;
+    // });
+
+    topCake = model;
+    scene.add(model);
+  },
+  (progress) => {
+    // console.log("Loading...");
+  }
+);
+
+// champagne load
+
+let champagneModel;
+
+gltfLoader.load(
+  champagnePath,
+  (gltf) => {
+    const model = gltf.scene;
+
+    // model.scale.set();
+    //position
+    model.position.x = 0.8;
+    model.position.y = -5;
+    model.position.z = -1;
+
+    model.traverse((o) => {
+      if (o.isMesh) o.material = material;
+    });
+
+    champagneModel = model;
+
+    camera.add(model);
+  },
+  (progress) => {
+    // console.log("Loading...");
+  }
+);
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -65,6 +138,8 @@ function randomIntMinMax(min, max) {
 }
 
 let cupcakeModels = [];
+
+// cupcake loop
 
 for (let i = 0; i < 20; i++) {
   // scale random
@@ -106,7 +181,7 @@ for (let i = 0; i < 20; i++) {
       scene.add(model);
     },
     (progress) => {
-      console.log("Loading...");
+      // console.log("Loading...");
     }
   );
 }
@@ -170,6 +245,9 @@ const tick = () => {
     cupcake.rotation.x = 0.1 * elapsedTime;
   }
 
+  topCake ? (topCake.rotation.y = 0.4 * elapsedTime) : null;
+  // champagneModel ? (champagneModel.rotation.y = 0.1 * elapsedTime) : null;
+
   // Render
   renderer.render(scene, camera);
 
@@ -210,3 +288,11 @@ function onMouseMove(e) {
   gsap.timeline().to(camera.rotation, { x: (-(e.clientY - centerY) / centerX) * 2 * mouseTolerance });
   // gsap.timeline().to(camera.rotation, { z: ((e.clientX - centerX) / centerY) * mouseTolerance });
 }
+
+inView("footer")
+  .on("enter", (el) => {
+    gsap.to(champagneModel.position, { duration: 1, y: -2 });
+  })
+  .on("exit", (el) => {
+    gsap.to(champagneModel.position, { duration: 1, y: -5 });
+  });

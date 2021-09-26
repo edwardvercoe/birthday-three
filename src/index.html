@@ -7,6 +7,11 @@
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
   </head>
   <body>
+    <div class="loading-svg">
+      <p>Just a moment...</p>
+      <img src="./images/spinner.svg" alt="spinner" />
+      <!-- <p><span class="progress">0</span>%</p> -->
+    </div>
     <canvas class="webgl"></canvas>
     <main id="wrapper">
       <header class="container">
@@ -22,7 +27,7 @@
           <div class="polaroid-collection">
             <!-- Start polaroid -->
             <div class="polaroid right-tilt" data-rellax-speed="7">
-              <div class="polaroid__container">
+              <div class="polaroid__container" style="top: -60px">
                 <figure>
                   <img src="./images/polaroid/15.jpg" alt="Polariod picture" />
                 </figure>
@@ -58,7 +63,7 @@
           </div>
 
           <!-- Start polaroid -->
-          <div class="polaroid right-tilt" data-rellax-speed="7">
+          <div class="polaroid left-tilt" data-rellax-speed="7">
             <div class="polaroid__container">
               <figure>
                 <img src="./images/polaroid/2.jpg" alt="Polariod picture" />
@@ -157,7 +162,7 @@
           </div>
 
           <!-- Start polaroid -->
-          <div class="polaroid left-tilt" data-rellax-speed="-4">
+          <div class="polaroid right-tilt" data-rellax-speed="-4" style="margin-left: auto; top: -100px">
             <div class="polaroid__container">
               <figure>
                 <img src="./images/polaroid/6.jpg" alt="Polariod picture" />
@@ -186,7 +191,7 @@
             </p>
           </div>
           <!-- Start polaroid -->
-          <div class="polaroid left-tilt" data-rellax-speed="-4">
+          <div class="polaroid left-tilt" data-rellax-speed="-4" style="margin-left: auto">
             <div class="polaroid__container">
               <figure>
                 <img src="./images/polaroid/7.jpg" alt="Polariod picture" />
@@ -282,7 +287,7 @@
             <h4>Happy birthday Betty! From the moment we met I knew we were gonna be peeps.</h4>
             <p>
               You’re a triple threat - smart, kind and very, very funny. So funny. The kind of person you wanna be on a boat with … every day! Thanks for saving my arse at work too many times to count, for listening to my whining, for culling my diary of lunches I don’t need to be at, for providing
-              many memorable lunches/dinners/sessions/inappropriate yet hilarious conversations, for caring about my family and being a proper, honest-to-goodness friend. You are a special one. And fabulous to boot!
+              many memorable lunches/dinners/ sessions/inappropriate yet hilarious conversations, for caring about my family and being a proper, honest-to-goodness friend. You are a special one. And fabulous to boot!
               <br />
               <br />
               <br />
@@ -1016,6 +1021,7 @@
       <footer class="container">
         <div class="center">
           <h3>Here's Cheers BB!</h3>
+          <p>Wishing you a very happy birthday BB. We all wish we could be with you to celebrate and raise a glass or 2 with you. Lots of love, your News family.</p>
         </div>
         <h4>Made with love by Roller Xoxo</h4>
       </footer>
