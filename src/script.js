@@ -15,18 +15,18 @@ Swiper.use([Navigation]);
 
 inView.threshold(0.5);
 
-inView(".color-yellow")
-  .on("enter", (el) => {
-    document.querySelector("body").style.backgroundColor = "#FCEAC2";
-    el.classList.add("active");
-  })
-  .on("exit", (el) => {
-    el.classList.remove("active");
-  });
+// inView(".color-yellow")
+//   .on("enter", (el) => {
+//     document.querySelector("body").style.backgroundColor = "#FCEAC2";
+//     el.classList.add("active");
+//   })
+//   .on("exit", (el) => {
+//     el.classList.remove("active");
+//   });
 
-inView(".color-pink").on("enter", (el) => {
-  document.querySelector("body").style.backgroundColor = "#ffe2ee";
-});
+// inView(".color-pink").on("enter", (el) => {
+//   document.querySelector("body").style.backgroundColor = "#ffe2ee";
+// });
 
 const swiperImg = new Swiper(".swiper-photos", {
   // Optional parameters

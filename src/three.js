@@ -41,10 +41,10 @@ scene.fog = new THREE.Fog(pinkColor, 0.0025, 8);
  * Camera
  */
 // Base camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
+const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 100);
 camera.position.x = 0;
 camera.position.y = 0;
-camera.position.z = 2;
+camera.position.z = 3;
 // camera.lookAt(0, 0, 0);
 
 scene.add(camera);
@@ -85,8 +85,9 @@ gltfLoader.load(
     model.scale.set(5, 5, 5);
     //position
     model.position.x = 0;
-    model.position.y = -0.5;
+    model.position.y = -1.5;
     model.position.z = 1;
+    model.rotation.x = 0.5;
 
     // model.traverse((o) => {
     //   if (o.isMesh) o.material = material;
@@ -103,6 +104,7 @@ gltfLoader.load(
 // champagne load
 
 let champagneModel;
+let champagneLight;
 
 gltfLoader.load(
   champagnePath,
@@ -113,15 +115,20 @@ gltfLoader.load(
     //position
     model.position.x = 0.8;
     model.position.y = -5;
-    model.position.z = -1;
+    model.position.z = -2;
 
     model.traverse((o) => {
       if (o.isMesh) o.material = material;
     });
 
-    champagneModel = model;
+    champagneLight = new THREE.PointLight(pinkColor, 1, 3, 1); // color, intensity, distance, decay
+    champagneLight.position.x = -1.5;
+    champagneLight.position.y = 1;
+    champagneLight.position.z = 1;
+    model.add(champagneLight);
 
     camera.add(model);
+    champagneModel = model;
   },
   (progress) => {
     // console.log("Loading...");
@@ -164,7 +171,7 @@ for (let i = 0; i < 20; i++) {
       // scale
       model.scale.set(scaleRandom, scaleRandom, scaleRandom);
       //position
-      model.position.y = -(i + 1);
+      model.position.y = -(i + 3);
       model.position.z = posRandomZ;
       model.position.x = posRandomX;
       // rotate
@@ -191,8 +198,11 @@ for (let i = 0; i < 20; i++) {
 const ambientLight = new THREE.AmbientLight(pinkColor, 1);
 scene.add(ambientLight);
 
-// const followLight = new THREE.PointLight(pinkColor, 0.3, 10, 1); // color, intensity, distance, decay
-// camera.add(followLight);
+const cakelight = new THREE.PointLight("white", 3, 3, 1); // color, intensity, distance, decay
+cakelight.position.x = 1;
+cakelight.position.y = -0.5;
+cakelight.position.z = 2;
+scene.add(cakelight);
 
 const directionalLight = new THREE.DirectionalLight(pinkColor, 0.3);
 camera.add(directionalLight);
@@ -230,6 +240,11 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
  * Animate
  */
 
+let cupcakeSlow = {
+  slow: false,
+  speed: 0.03,
+};
+
 const clock = new THREE.Clock();
 
 const tick = () => {
@@ -245,7 +260,17 @@ const tick = () => {
     cupcake.rotation.x = 0.1 * elapsedTime;
   }
 
-  topCake ? (topCake.rotation.y = 0.4 * elapsedTime) : null;
+  topCake ? (topCake.rotation.y = topCake.rotation.y + cupcakeSlow.speed) : null;
+
+  if (cupcakeSlow.slow == true) {
+    cupcakeSlow.speed > 0.005 ? (cupcakeSlow.speed = cupcakeSlow.speed - 0.0005) : null;
+  } else if (cupcakeSlow.slow == false) {
+    cupcakeSlow.speed < 0.03 ? (cupcakeSlow.speed = cupcakeSlow.speed + 0.0005) : null;
+  }
+
+  champagneLight ? (champagneLight.position.x = Math.sin(elapsedTime)) : null;
+  champagneLight ? (champagneLight.position.y = Math.sin(elapsedTime)) : null;
+
   // champagneModel ? (champagneModel.rotation.y = 0.1 * elapsedTime) : null;
 
   // Render
@@ -291,8 +316,16 @@ function onMouseMove(e) {
 
 inView("footer")
   .on("enter", (el) => {
-    gsap.to(champagneModel.position, { duration: 1, y: -2 });
+    gsap.to(champagneModel.position, { duration: 1.5, y: -2 });
   })
   .on("exit", (el) => {
-    gsap.to(champagneModel.position, { duration: 1, y: -5 });
+    gsap.to(champagneModel.position, { duration: 1.5, y: -5 });
+  });
+
+inView(".cupcake")
+  .on("enter", (el) => {
+    cupcakeSlow.slow = true;
+  })
+  .on("exit", (el) => {
+    cupcakeSlow.slow = false;
   });
