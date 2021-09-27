@@ -322,7 +322,7 @@ inView("footer")
     gsap.to(champagneModel.position, { duration: 1.5, y: -0.2 });
   })
   .on("exit", (el) => {
-    gsap.to(champagneModel.position, { duration: 1.5, y: -5 });
+    gsap.to(champagneModel.position, { duration: 1.5, y: -3 });
   });
 
 inView(".cupcake")
