@@ -16,7 +16,7 @@ const loadDiv = document.querySelector(".loading-svg");
 
 const modelPath = "/models/cupcake2.glb";
 const colorCake = "/models/color-cupcake.glb";
-const champagnePath = "/models/bottle-cork.glb";
+const champagnePath = "/models/champ.glb";
 
 /**
  * Sizes
@@ -31,6 +31,7 @@ const canvas = document.querySelector("canvas.webgl");
 
 //
 const pinkColor = new THREE.Color(0xffe2ee);
+const champColor = new THREE.Color(0xff95d6);
 
 // Scene
 const scene = new THREE.Scene();
@@ -55,6 +56,8 @@ scene.add(camera);
 // Material
 
 const material = new THREE.MeshLambertMaterial({ color: pinkColor });
+
+const materialChamp = new THREE.MeshLambertMaterial({ color: champColor });
 
 // Model
 const loadingManager = new THREE.LoadingManager(
@@ -119,16 +122,9 @@ gltfLoader.load(
     // rotation
     model.rotation.z = 0.5;
 
-    model.traverse((o) => {
-      if (o.isMesh) o.material = material;
-    });
-
-    // champagneLight = new THREE.PointLight(pinkColor, 1, 2, 1.5); // color, intensity, distance, decay
-    // champagneLight.position.x = 3;
-    // champagneLight.position.y = 1;
-    // champagneLight.position.z = 1;
-
-    // model.add(champagneLight);
+    // model.traverse((o) => {
+    //   if (o.isMesh) o.material = materialChamp;
+    // });
 
     camera.add(model);
     champagneModel = model;
@@ -200,6 +196,15 @@ for (let i = 0; i < 20; i++) {
 
 const ambientLight = new THREE.AmbientLight(pinkColor, 1);
 scene.add(ambientLight);
+
+champagneLight = new THREE.PointLight("white", 3, 3, 1); // color, intensity, distance, decay
+champagneLight.position.x = 0;
+champagneLight.position.y = -5;
+champagneLight.position.z = 0;
+
+champagneLight.visible = false;
+
+camera.add(champagneLight);
 
 const cakelight = new THREE.PointLight("white", 3, 3, 1); // color, intensity, distance, decay
 cakelight.position.x = 1;
@@ -320,9 +325,13 @@ function onMouseMove(e) {
 inView("footer")
   .on("enter", (el) => {
     gsap.to(champagneModel.position, { duration: 1.5, y: -0.2 });
+    champagneLight.visible = true;
+    gsap.to(champagneLight.position, { duration: 1.5, y: 0 });
   })
   .on("exit", (el) => {
     gsap.to(champagneModel.position, { duration: 1.5, y: -3 });
+    champagneLight.visible = false;
+    gsap.to(champagneLight.position, { duration: 1.5, y: -5 });
   });
 
 inView(".cupcake")
