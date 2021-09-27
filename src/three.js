@@ -113,19 +113,22 @@ gltfLoader.load(
 
     // model.scale.set();
     //position
-    model.position.x = 0.8;
+    model.position.x = 0;
     model.position.y = -5;
     model.position.z = -2;
+    // rotation
+    model.rotation.z = 0.5;
 
     model.traverse((o) => {
       if (o.isMesh) o.material = material;
     });
 
-    champagneLight = new THREE.PointLight(pinkColor, 1, 3, 1); // color, intensity, distance, decay
-    champagneLight.position.x = -1.5;
-    champagneLight.position.y = 1;
-    champagneLight.position.z = 1;
-    model.add(champagneLight);
+    // champagneLight = new THREE.PointLight(pinkColor, 1, 2, 1.5); // color, intensity, distance, decay
+    // champagneLight.position.x = 3;
+    // champagneLight.position.y = 1;
+    // champagneLight.position.z = 1;
+
+    // model.add(champagneLight);
 
     camera.add(model);
     champagneModel = model;
@@ -268,10 +271,10 @@ const tick = () => {
     cupcakeSlow.speed < 0.03 ? (cupcakeSlow.speed = cupcakeSlow.speed + 0.0005) : null;
   }
 
-  champagneLight ? (champagneLight.position.x = Math.sin(elapsedTime)) : null;
-  champagneLight ? (champagneLight.position.y = Math.sin(elapsedTime)) : null;
+  // champagneLight ? (champagneLight.position.x = Math.sin(elapsedTime)) : null;
+  // champagneLight ? (champagneLight.position.y = Math.sin(elapsedTime)) : null;
 
-  // champagneModel ? (champagneModel.rotation.y = 0.1 * elapsedTime) : null;
+  champagneModel ? (champagneModel.rotation.y = 0.5 * elapsedTime) : null;
 
   // Render
   renderer.render(scene, camera);
@@ -316,7 +319,7 @@ function onMouseMove(e) {
 
 inView("footer")
   .on("enter", (el) => {
-    gsap.to(champagneModel.position, { duration: 1.5, y: -2 });
+    gsap.to(champagneModel.position, { duration: 1.5, y: 0 });
   })
   .on("exit", (el) => {
     gsap.to(champagneModel.position, { duration: 1.5, y: -5 });
