@@ -17,12 +17,12 @@
 
   figure {
     width: 100%;
-    max-width: 260px;
-    max-height: 260px;
+    max-width: 300px;
+    max-height: 300px;
     margin: 0 auto;
     img {
       width: 100%;
-      height: 260px;
+      height: 300px;
       object-fit: cover;
       margin: 0 auto;
     }
@@ -34,6 +34,14 @@
   color: #fff;
   text-shadow: 2px 2px $dropshadow;
   z-index: 10;
+}
+
+.swiper-button-prev {
+  left: 0;
+}
+
+.swiper-button-next {
+  right: 0;
 }
 
 // .swiper {

@@ -82,7 +82,7 @@ gltfLoader.load(
   (gltf) => {
     const model = gltf.scene;
 
-    model.scale.set(5, 5, 5);
+    model.scale.set(7, 7, 7);
     //position
     model.position.x = 0;
     model.position.y = -1.5;
@@ -115,7 +115,7 @@ gltfLoader.load(
     //position
     model.position.x = 0;
     model.position.y = -5;
-    model.position.z = -2;
+    model.position.z = -2.3;
     // rotation
     model.rotation.z = 0.5;
 
@@ -305,7 +305,7 @@ window.addEventListener("scroll", updateCamera);
 
 window.addEventListener("mousemove", onMouseMove);
 
-var mouseTolerance = 0.1;
+var mouseTolerance = 0.01;
 
 function onMouseMove(e) {
   e.preventDefault();
@@ -319,7 +319,7 @@ function onMouseMove(e) {
 
 inView("footer")
   .on("enter", (el) => {
-    gsap.to(champagneModel.position, { duration: 1.5, y: 0 });
+    gsap.to(champagneModel.position, { duration: 1.5, y: -0.2 });
   })
   .on("exit", (el) => {
     gsap.to(champagneModel.position, { duration: 1.5, y: -5 });
